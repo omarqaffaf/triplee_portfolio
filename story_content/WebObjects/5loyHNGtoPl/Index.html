@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bottom Logo Marquee</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .marquee-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+      background: transparent;
+      z-index: 9999;
+    }
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 40px;
+      will-change: transform;
+      position: absolute;
+      white-space: nowrap;
+    }
+
+    .marquee-track img {
+      height: 120px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="marquee-container">
+    <div class="marquee-track" id="track">
+      <!-- LOGOS -->
+      <img src="logo1.png" alt="Logo 1">
+      <img src="logo2.png" alt="Logo 2">
+      <img src="logo3.png" alt="Logo 1">
+      <img src="logo4.png" alt="Logo 2">
+      <img src="logo5.png" alt="Logo 1">
+      <img src="logo6.png" alt="Logo 2">
+    </div>
+  </div>
+
+  <script>
+    const track = document.getElementById('track');
+    let speed = 0.4; // pixels per frame
+    let position = 0;
+
+    // Clone logos initially so there's enough to scroll
+    const initialLogos = [...track.children];
+    for (let i = 0; i < 5; i++) {
+      initialLogos.forEach(logo => {
+        track.appendChild(logo.cloneNode(true));
+      });
+    }
+
+    function animate() {
+      position -= speed;
+      track.style.transform = `translateX(${position}px)`;
+
+      // When the first logo scrolls out of view, remove and append it
+      const firstLogo = track.children[0];
+      const logoWidth = firstLogo.offsetWidth + 40; // 40 is the gap
+
+      if (Math.abs(position) >= logoWidth) {
+        position += logoWidth;
+        track.appendChild(firstLogo);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    // Start animation after DOM fully loads
+    window.onload = () => {
+      requestAnimationFrame(animate);
+    };
+  </script>
+</body>
+</html>
+

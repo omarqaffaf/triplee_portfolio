@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset and ensure full viewport usage with transparent background */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent; /* Transparent background */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Glowing rotating circle style */
+        .glowing-circle {
+            position: absolute;
+            width: 250px;  /* Adjusted size for the glowing circle */
+            height: 250px; /* Adjusted size for the glowing circle */
+            border-radius: 50%;  /* Make it a circle */
+            background: transparent; /* Make the inside transparent */
+            box-shadow: 0 0 40px 10px rgba(92, 92, 92, 0.7); /* Glow effect */
+            animation: glowing 5s ease-in-out infinite alternate, rotateCircle 6s linear infinite; /* Glow and rotate animations */
+        }
+
+        /* Glowing animation */
+        @keyframes glowing {
+            0% {
+                box-shadow: 0 0 40px 10px rgba(255, 121, 44, 0.526), 0 0 60px 20px rgba(255, 196, 0, 0.203);
+            }
+            100% {
+                box-shadow: 0 0 80px 20px rgb(255, 255, 255), 0 0 120px 30px rgba(255, 196, 0, 0.203);
+            }
+        }
+
+        /* Rotate the circle 360 degrees */
+        @keyframes rotateCircle {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Glowing rotating circle element -->
+    <div class="glowing-circle"></div>
+</body>
+</html>
